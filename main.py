@@ -1,6 +1,7 @@
 import requests
 import pandas as pd
 import json
+import time
 
 
 # 获取某一mod所有的文件列表并以数据框返回
@@ -63,6 +64,7 @@ def main():
         first = True
 
 # 根config中的modids获取最新的文件url
+    note = {}
     if first:
         # 第一次运行则下载所有mods并将modid与fileid写入modlist
         for i in range(len(modids)):
@@ -70,23 +72,33 @@ def main():
             files_meta = get_files(modid)
             new = get_newest(files_meta, modloader, gamever)
             file_id = new.at[0, 'fileID']
-            mods[modid] = [file_id]
+            note[modid] = [str(file_id)]
             d_url = new.at[0, 'downloadUrl']
             d_urls.append(d_url)
-            downloadUrls = json.dumps(d_urls)
     else:
         # 不是第一次则在mods中modid列表第0位写入新的fileid，旧的写入第1位
+        with open('./latest.json', 'w') as lastjson:
+            last = json.load(lastjson)
         for i in range(len(modids)):
             modid = modids[i]
             files_meta = get_files(modid)
             new = get_newest(files_meta, modloader, gamever)
             file_id = new.at[0, 'fileID']
-            mods[modid][1] = mods[modid][0]
-            mods[modid][0] = file_id
-            d_url = new.at[0, 'downloadUrl']
-            d_urls.append(d_url)
-            downloadUrls = json.dumps(d_urls)
-    return downloadUrls
+            old_file = last[modid][0]
+            if int(old_file) < file_id:
+                note[modid][1] = old_file
+                note[modid][0] = str(file_id)
+                d_url = new.at[0, 'downloadUrl']
+                d_urls.append(d_url)
+    datetag = time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())
+    mods[datetag] = note
+    with open('./latest.json', 'w') as latest:
+        latest.write(json.dumps(note))
+    with open('./modlist.json', 'w') as modlist:
+        modlist.write(json.dumps(mods))
+    with open('./download_urls.txt', 'w') as download_urls:
+        for urls in d_urls:
+            download_urls.write(urls+'\n')
 
 
 if __name__ == '__main__':
