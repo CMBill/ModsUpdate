@@ -75,12 +75,14 @@ def main():
             modid = modids[i]
             files_meta = get_files(modid)
             new = get_newest(files_meta, modloader, gamever)
-            d_url = new.at[0, 'downloadUrl']
-            d_urls.append(d_url)
-
-            file_id = new.at[0, 'fileID']
+            if new.empty:
+                file_id = 1
+            else:
+                d_url = new.iloc[0]['downloadUrl']
+                d_urls.append(d_url)
+                file_id = new.iloc[0]['fileID']
             note[modid] = [str(file_id)]
-            mods[modid] = file_id
+            mods[modid] = str(file_id)
     else:
         # 根据update notes长度获取last update num
         last_update_num = len(update_notes)
@@ -89,14 +91,19 @@ def main():
         for i in range(len(modids)):
             modid = modids[i]
             files_meta = get_files(modid)
-            new = get_newest(files_meta, modloader, gamever)
-            file_id = new.at[0, 'fileID']
             old_file = mods[modid]
+            new = get_newest(files_meta, modloader, gamever)
+            if new.empty:
+                file_id = 1
+            else:
+                file_id = new.iloc[0]['fileID']
             if int(old_file) < file_id:
+                d_url = new.iloc[0]['downloadUrl']
+                d_urls.append(d_url)
+                mods[modid] = str(file_id)
+                note[modid] = [None] * 2
                 note[modid][0] = str(file_id)
                 note[modid][1] = old_file
-                d_url = new.at[0, 'downloadUrl']
-                d_urls.append(d_url)
     # 在update notes中写入时间与更新记录
     datetag = time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())
     update_notes[update_num] = {}
