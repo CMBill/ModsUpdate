@@ -39,28 +39,53 @@ def get_files(modid):
 
 
 # 根据需求从数据框中返回下载Url
-def get_url(files_meta, loader, gver):
+def get_newest(files_meta, loader, gver):
     meta_select = files_meta.loc[files_meta['modloader'] == loader, ]
     meta_select = meta_select.loc[meta_select['MCVersions'] == gver, ]
-    download_url = meta_select.loc[meta_select['fileDate'] == meta_select.loc[:, 'fileDate'].max(), 'downloadUrl'].at[0]
-    return download_url
+    newest = meta_select.loc[meta_select['fileDate'] == meta_select.loc[:, 'fileDate'].max()]
+    return newest
 
 
 def main():
     with open('./config.json') as config_meta:
         config = json.load(config_meta)
-
     gamever = config['MC_Version']
-    modloader = config['Mod_loader']
+    modloader = config['Mod_Loader']
     modids = config['ModIDs']
     d_urls = []
 
-    for i in range(len(modids)):
-        modid = modids[i]
-        files_meta = get_files(modid)
-        d_url = get_url(files_meta, modloader, gamever)
-        d_urls.append(d_url)
-    downloadUrls = json.dumps(d_urls)
+    try:
+        with open('./modlist.json') as modlist:
+            mods = json.load(modlist)
+        first = False
+    except:
+        mods = {}
+        first = True
+
+# 根config中的modids获取最新的文件url
+    if first:
+        # 第一次运行则下载所有mods并将modid与fileid写入modlist
+        for i in range(len(modids)):
+            modid = modids[i]
+            files_meta = get_files(modid)
+            new = get_newest(files_meta, modloader, gamever)
+            file_id = new.at[0, 'fileID']
+            mods[modid] = [file_id]
+            d_url = new.at[0, 'downloadUrl']
+            d_urls.append(d_url)
+            downloadUrls = json.dumps(d_urls)
+    else:
+        # 不是第一次则在mods中modid列表第0位写入新的fileid，旧的写入第1位
+        for i in range(len(modids)):
+            modid = modids[i]
+            files_meta = get_files(modid)
+            new = get_newest(files_meta, modloader, gamever)
+            file_id = new.at[0, 'fileID']
+            mods[modid][1] = mods[modid][0]
+            mods[modid][0] = file_id
+            d_url = new.at[0, 'downloadUrl']
+            d_urls.append(d_url)
+            downloadUrls = json.dumps(d_urls)
     return downloadUrls
 
 
