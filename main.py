@@ -58,47 +58,60 @@ def main():
     try:
         with open('./modlist.json') as modlist:
             mods = json.load(modlist)
+        with open('./update_notes.json') as update_notes_json:
+            update_notes = json.load(update_notes_json)
         first = False
     except:
         mods = {}
+        update_notes = {}
         first = True
 
 # 根config中的modids获取最新的文件url
     note = {}
     if first:
         # 第一次运行则下载所有mods并将modid与fileid写入modlist
+        update_num = '1'
         for i in range(len(modids)):
             modid = modids[i]
             files_meta = get_files(modid)
             new = get_newest(files_meta, modloader, gamever)
-            file_id = new.at[0, 'fileID']
-            note[modid] = [str(file_id)]
             d_url = new.at[0, 'downloadUrl']
             d_urls.append(d_url)
+
+            file_id = new.at[0, 'fileID']
+            note[modid] = [str(file_id)]
+            mods[modid] = file_id
     else:
-        # 不是第一次则在mods中modid列表第0位写入新的fileid，旧的写入第1位
-        with open('./latest.json', 'w') as lastjson:
-            last = json.load(lastjson)
+        # 根据update notes长度获取last update num
+        last_update_num = len(update_notes)
+        update_num = str(last_update_num + 1)
+
         for i in range(len(modids)):
             modid = modids[i]
             files_meta = get_files(modid)
             new = get_newest(files_meta, modloader, gamever)
             file_id = new.at[0, 'fileID']
-            old_file = last[modid][0]
+            old_file = mods[modid]
             if int(old_file) < file_id:
-                note[modid][1] = old_file
                 note[modid][0] = str(file_id)
+                note[modid][1] = old_file
                 d_url = new.at[0, 'downloadUrl']
                 d_urls.append(d_url)
+    # 在update notes中写入时间与更新记录
     datetag = time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())
-    mods[datetag] = note
-    with open('./latest.json', 'w') as latest:
-        latest.write(json.dumps(note))
+    update_notes[update_num] = {}
+    update_notes[update_num]['date'] = datetag
+    update_notes[update_num]['mods'] = note
+
+    with open('./update_notes.json', 'w') as latest:
+        latest.write(json.dumps(update_notes, indent=2))
     with open('./modlist.json', 'w') as modlist:
-        modlist.write(json.dumps(mods))
+        modlist.write(json.dumps(mods, indent=2))
     with open('./download_urls.txt', 'w') as download_urls:
         for urls in d_urls:
             download_urls.write(urls+'\n')
+
+    return update_num + 'Done'
 
 
 if __name__ == '__main__':
