@@ -46,7 +46,7 @@ jobs:
             update_notes.json
             modlist.json
             download_urls.txt
-            ./mods/*
+            ./mods
           commit-message: Committing files
           ref: refs/heads/master
           
