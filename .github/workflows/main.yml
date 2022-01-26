@@ -1,0 +1,68 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Update Mods
+
+# Controls when the workflow will run
+on:
+  schedule:
+    - cron: '0 0 1,15 * *'
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build:
+    name: get the url of mods
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+        
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2.3.1
+        with: 
+          python-version: '3.9'
+          cache: 'pip'
+      - run: pip install -r requirements.txt
+
+      - name: get
+        run: python main.py
+
+      - name: download
+        run: |
+          rm -rf ./mods/*
+          touch ./mods/00mod
+          wget -P ./mods -i download_urls.txt
+          
+      - name: Commit files
+        uses: swinton/commit@v2.0.0
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: |
+            update_notes.json
+            modlist.json
+            download_urls.txt
+            ./mods/*
+          commit-message: Committing files
+          ref: refs/heads/master
+          
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with: 
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: zip
+        run: zip -r ./mods.zip ./mods/*
+        
+      - name: Release
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "${{ steps.date.outputs.date }}"
+          prerelease: false
+          files: mods.zip
+      
