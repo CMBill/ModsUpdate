@@ -43,10 +43,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           files: |
-            update_notes.json
-            modlist.json
-            download_urls.txt
-            ./mods
+            .
           commit-message: Committing files
           ref: refs/heads/master
           
