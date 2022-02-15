@@ -1,5 +1,12 @@
-https://edge.forgecdn.net/files/3626/708/appleskin-fabric-mc1.18.1-2.3.0.jar
-https://edge.forgecdn.net/files/3573/192/carpet-tis-addition-mc1.18.1-v1.27.3.jar
-https://edge.forgecdn.net/files/3630/909/malilib-fabric-1.18.1-0.11.6.jar
-https://edge.forgecdn.net/files/3619/950/minihud-fabric-1.18.1-0.21.3.jar
-https://edge.forgecdn.net/files/3630/905/tweakeroo-fabric-1.18.1-0.12.2.jar
+https://edge.forgecdn.net/files/3646/95/carpet-tis-addition-mc1.18.1-v1.30.0.jar
+https://edge.forgecdn.net/files/3612/123/cloth-api-3.1.61.jar
+https://edge.forgecdn.net/files/3641/132/cloth-config-6.2.57-fabric.jar
+https://edge.forgecdn.net/files/3634/318/fabric-api-0.46.4+1.18.jar
+https://edge.forgecdn.net/files/3647/297/InventoryProfilesNext-fabric-1.18-1.3.2.jar
+https://edge.forgecdn.net/files/3645/957/litematica-fabric-1.18.1-0.10.2.jar
+https://edge.forgecdn.net/files/3647/223/malilib-fabric-1.18.1-0.11.7.jar
+https://edge.forgecdn.net/files/3646/28/MasaGadget-1.18.1-2.0.8.jar
+https://edge.forgecdn.net/files/3643/79/tweakeroo-fabric-1.18.1-0.12.3.jar
+https://edge.forgecdn.net/files/3635/138/wthit-fabric-4.5.1.jar
+https://edge.forgecdn.net/files/3647/8/Xaeros_Minimap_22.2.0.1_Fabric_1.18.jar
+https://edge.forgecdn.net/files/3646/988/XaerosWorldMap_1.20.3.1_Fabric_1.18.jar
