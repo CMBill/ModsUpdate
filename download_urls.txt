@@ -1,9 +1,4 @@
-https://edge.forgecdn.net/files/3670/754/CustomSkinLoader_Fabric-14.13-SNAPSHOT-317.jar
-https://edge.forgecdn.net/files/3671/143/fabric-api-0.46.6+1.18.jar
-https://edge.forgecdn.net/files/3679/957/InventoryProfilesNext-fabric-1.18-1.3.5.jar
-https://edge.forgecdn.net/files/3671/374/itemscroller-fabric-1.18.1-0.16.0.jar
-https://edge.forgecdn.net/files/3671/382/litematica-fabric-1.18.1-0.10.4.jar
-https://edge.forgecdn.net/files/3671/369/malilib-fabric-1.18.1-0.11.8.jar
-https://edge.forgecdn.net/files/3671/389/minihud-fabric-1.18.1-0.21.5.jar
-https://edge.forgecdn.net/files/3662/798/wthit-fabric-4.5.4.jar
-https://edge.forgecdn.net/files/3663/16/Xaeros_Minimap_22.3.0_Fabric_1.18.jar
+https://edge.forgecdn.net/files/3695/976/CustomSkinLoader_Fabric-14.13.jar
+https://edge.forgecdn.net/files/3720/460/MasaGadget-1.18.2-2.0.9.1.jar
+https://edge.forgecdn.net/files/3711/861/oh-my-minecraft-client-1.18.2-0.4.2.jar
+https://edge.forgecdn.net/files/3707/3/wthit-fabric-4.5.5.jar
