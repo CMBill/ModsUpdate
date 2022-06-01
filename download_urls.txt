@@ -1,1 +1,1 @@
-https://edge.forgecdn.net/files/3790/128/InventoryProfilesNext-fabric-1.18-1.3.7.jar
+https://edge.forgecdn.net/files/3810/330/InventoryProfilesNext-fabric-1.18-1.5.0.jar
