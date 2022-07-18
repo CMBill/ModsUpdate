@@ -39,7 +39,7 @@ jobs:
           
       - name: Commit files
         run: |
-          git config --global user.email callmebill11@outlook.com
+          git config --global user.email callmebill@billw.cn
           git config --global user.name CMBill
           git add .
           git commit -m "update" -a
