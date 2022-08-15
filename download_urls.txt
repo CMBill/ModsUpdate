@@ -1,3 +1,1 @@
-https://edge.forgecdn.net/files/3904/497/CustomSkinLoader_Fabric-14.14-SNAPSHOT-343.jar
-https://edge.forgecdn.net/files/3887/669/fabric-language-kotlin-1.8.2+kotlin.1.7.10.jar
-https://edge.forgecdn.net/files/3896/251/InventoryProfilesNext-fabric-1.18-1.6.1.jar
+https://edge.forgecdn.net/files/3934/840/InventoryProfilesNext-fabric-1.18-1.6.4.jar
