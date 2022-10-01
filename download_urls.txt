@@ -1,1 +1,2 @@
-https://edge.forgecdn.net/files/3965/838/InventoryProfilesNext-fabric-1.18-1.7.1.jar
+https://edge.forgecdn.net/files/4012/526/fabric-language-kotlin-1.8.4+kotlin.1.7.20.jar
+https://edge.forgecdn.net/files/4010/17/InventoryProfilesNext-fabric-1.18-1.8.1.jar
