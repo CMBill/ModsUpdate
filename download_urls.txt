@@ -1,1 +1,1 @@
-https://edge.forgecdn.net/files/4365/985/CustomSkinLoader_Fabric-14.15.2.jar
+https://edge.forgecdn.net/files/4378/167/fabric-language-kotlin-1.9.1+kotlin.1.8.10.jar
