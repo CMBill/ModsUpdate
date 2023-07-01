@@ -1,1 +1,1 @@
-https://edge.forgecdn.net/files/4575/400/fabric-language-kotlin-1.9.5+kotlin.1.8.22.jar
+https://edge.forgecdn.net/files/4608/620/fabric-language-kotlin-1.9.6+kotlin.1.8.22.jar
