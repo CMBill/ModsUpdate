@@ -1,0 +1,1 @@
+https://edge.forgecdn.net/files/4719/981/fabric-language-kotlin-1.10.10+kotlin.1.9.10.jar
